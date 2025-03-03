@@ -234,6 +234,27 @@ public class SinglyLinkedList_Implementation {
         return head;
     }
 
+    //Insert a node in a sorted LinkedList
+    public ListNode insertTheNodeInSortedList(ListNode head,int value){
+      
+        ListNode newNode=new ListNode(value);
+        // Case 1: Empty list or inserting at the head
+        if (head == null || value < head.data) {
+            newNode.next = head;
+            return newNode; // New head of the list
+        }
+        ListNode current=head;
+        ListNode temp=null;
+        while(current!=null&&current.data<newNode.data){
+            temp=current;
+            current=current.next;
+        }
+        newNode.next=current;
+        temp.next=newNode;
+        return head;
+
+    }
+
     
 
    
@@ -297,14 +318,21 @@ public class SinglyLinkedList_Implementation {
          sll.addFirst(4);
          sll.addFirst(4);
          sll.addFirst(5);
+         sll.addFirst(9);
 
          sll.printElements(sll.head);
 
          ListNode identicalElements=sll.removeDuplicates(sll.head);
          sll.printElements(identicalElements);
 
+         ListNode reverseList2= sll.reverse(sll.head);
+         sll.printElements(reverseList2);
 
-         
+         ListNode addSorted= sll.insertTheNodeInSortedList(reverseList2,7);
+         sll.printElements(addSorted);
+
+
+
 
         
 

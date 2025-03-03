@@ -177,6 +177,21 @@ public class SinglyLinkedList_Implementation {
         
     }
 
+    //Find the Middle element in singlyLinkedlist
+
+    public ListNode middleElement(ListNode head){
+        if(head==null){
+            return head;
+        }
+        ListNode slowPtr=head;
+        ListNode fastPtr=head;
+        while(fastPtr!=null&&fastPtr.next!=null){
+           slowPtr=slowPtr.next;
+           fastPtr=fastPtr.next.next;
+        }
+        return slowPtr;
+    }
+
     
 
    
@@ -217,8 +232,13 @@ public class SinglyLinkedList_Implementation {
          sll.delAtPos(3);
          sll.printElements(sll.head);
          System.out.println("Is element is present?: "+ sll.searchElement(5));
-        ListNode reverseList= sll.reverse(sll.head);
+
+         
+         ListNode reverseList= sll.reverse(sll.head);
          sll.printElements(reverseList);
+
+         ListNode middleNode=sll.middleElement(reverseList);
+         System.out.println("The middle element in a singlyLinkedlist: "+middleNode.data);
 
 
 

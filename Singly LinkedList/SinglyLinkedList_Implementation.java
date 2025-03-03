@@ -13,17 +13,6 @@ public class SinglyLinkedList_Implementation {
         
     }
 
-    //Delete the first node in a Singly list 
-    public ListNode delFirst(){
-        if(head==null){
-            return null;
-        }else{
-            ListNode temp=head;
-            head=head.next;
-            temp.next=null;
-            return temp;
-        }
-    }
 
 
 
@@ -44,10 +33,10 @@ public class SinglyLinkedList_Implementation {
     }
 
 
-
+  
 
     //print the elements in the linkedlist
-    public void printElements(){
+    public void printElements(ListNode head){
         
         ListNode current=head;
         while(current!=null){
@@ -107,6 +96,22 @@ public class SinglyLinkedList_Implementation {
         }
     }
 
+    
+    //Delete the first node in a Singly list 
+    public ListNode delFirst(){
+        if(head==null){
+            return null;
+        }else{
+            ListNode temp=head;
+            head=head.next;
+            temp.next=null;
+            return temp;
+        }
+    }
+
+     
+
+    //delete the node at last 
     public ListNode delLast(){
         if(head==null||head.next==null){
             return head;
@@ -122,6 +127,60 @@ public class SinglyLinkedList_Implementation {
             return current;
         }
     }
+
+// delete the node at a given position
+    public void delAtPos(int position){
+        if(position==1){
+            head=head.next;
+        }else{
+            ListNode prev=head;
+            int count=1;
+            while(count<position-1){
+                prev=prev.next;
+                count++;
+            }
+            ListNode current=prev.next;
+            prev.next=current.next;
+        }
+    }
+
+    //search an element in a singly linked list
+
+    public boolean searchElement(int element){
+        ListNode current=head;
+        while(current!=null){
+            if(current.data==element){
+                return true;
+            }
+            current=current.next;
+        }
+        return false;
+    }
+
+    //Reverse a singlyLinkedlist
+
+    public ListNode reverse(ListNode head){
+        if(head==null){
+            return head;
+        }
+        ListNode current=head;
+        ListNode prev=null;
+        ListNode next=null;
+        while(current!=null){
+            next=current.next;
+            current.next=prev;
+            prev=current;
+            current=next;
+            
+        }
+        return prev;
+        
+    }
+
+    
+
+   
+
 
 
 
@@ -141,20 +200,25 @@ public class SinglyLinkedList_Implementation {
         third.next=fourth;
 
  
-         sll.printElements();
+         sll.printElements(sll.head);
          System.out.println("Length of a Linkedlist: "+ sll.length());
          sll.addFirst(12);
-         sll.printElements();
+         sll.printElements(sll.head);
          sll.addLast(13);
-         sll.printElements();
+         sll.printElements(sll.head);
          sll.addAtPosition(5,3);
-         sll.printElements();
+         sll.printElements(sll.head);
          System.out.println("Deleted element is:"+sll.delFirst().data);
-         sll.printElements();
+         sll.printElements(sll.head);
          System.out.println("Deleted element at last: "+sll.delLast().data);
-         sll.printElements();
+         sll.printElements(sll.head);
          System.out.println("Deleted element at last: "+sll.delLast().data);
-         sll.printElements();
+         sll.printElements(sll.head);
+         sll.delAtPos(3);
+         sll.printElements(sll.head);
+         System.out.println("Is element is present?: "+ sll.searchElement(5));
+        ListNode reverseList= sll.reverse(sll.head);
+         sll.printElements(reverseList);
 
 
 

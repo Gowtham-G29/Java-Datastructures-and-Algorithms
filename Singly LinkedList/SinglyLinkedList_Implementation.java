@@ -16,6 +16,8 @@ public class SinglyLinkedList_Implementation {
 
 
 
+
+
     //Length of a linkedlist
     public int length(){
 
@@ -192,6 +194,46 @@ public class SinglyLinkedList_Implementation {
         return slowPtr;
     }
 
+    //Find the nth node from the last
+    public ListNode nthNodeFromLast(ListNode head,int n){
+
+        if(head==null){
+            return null;
+        }
+        // if(n<=0){
+        //     throw new illegalArgumentException("Invalid n value");
+        // }
+        ListNode refPtr=head;
+        ListNode mainPtr=head;
+
+        int count=0;
+        while(count<n){
+            refPtr=refPtr.next;
+            count++;
+        }
+        while(refPtr!=null){
+            refPtr=refPtr.next;
+            mainPtr=mainPtr.next;
+        }
+        return mainPtr;
+    }
+
+    //Remove duplicates from a sortedList
+    public ListNode removeDuplicates(ListNode head){
+        if(head==null){
+            return null;
+        }
+        ListNode current=head;
+        while(current!=null&&current.next!=null){
+            if(current.data==current.next.data){
+                current.next=current.next.next;
+            }else{
+                current=current.next;
+            }
+        }
+        return head;
+    }
+
     
 
    
@@ -202,10 +244,10 @@ public class SinglyLinkedList_Implementation {
     //Main function
     public static void main(String[] args){
         SinglyLinkedList_Implementation sll=new SinglyLinkedList_Implementation();
-        sll.head=new ListNode(10);
+        sll.head=new ListNode(1);
         ListNode second=new ListNode(1);
-        ListNode third=new ListNode(8);
-        ListNode fourth=new ListNode(11);
+        ListNode third=new ListNode(2);
+        ListNode fourth=new ListNode(3);
 
 
         //connect to form a chain
@@ -233,12 +275,41 @@ public class SinglyLinkedList_Implementation {
          sll.printElements(sll.head);
          System.out.println("Is element is present?: "+ sll.searchElement(5));
 
-         
+
          ListNode reverseList= sll.reverse(sll.head);
          sll.printElements(reverseList);
 
          ListNode middleNode=sll.middleElement(reverseList);
          System.out.println("The middle element in a singlyLinkedlist: "+middleNode.data);
+
+         ListNode nthNodeFromlast=sll.nthNodeFromLast(reverseList, 2);
+         System.out.println("The Nth Node from the Last: "+nthNodeFromlast.data);
+
+         sll.delLast();
+         sll.delLast();
+         sll.delLast();
+         sll.delLast();
+         sll.printElements(sll.head);
+
+         sll.addFirst(1);
+         sll.addFirst(2);
+         sll.addFirst(3);
+         sll.addFirst(4);
+         sll.addFirst(4);
+         sll.addFirst(5);
+
+         sll.printElements(sll.head);
+
+         ListNode identicalElements=sll.removeDuplicates(sll.head);
+         sll.printElements(identicalElements);
+
+
+         
+
+        
+
+
+         
 
 
 

@@ -255,6 +255,30 @@ public class SinglyLinkedList_Implementation {
 
     }
 
+
+    //Remove the given key from a singlyLinkedList
+    public void removeTheKey(ListNode head,int key){
+        if(head==null){
+            return;
+        }
+        ListNode current=head;
+        ListNode temp=null;
+
+        if(current!=null&&current.data==key){
+            head=head.next;
+            return;
+        }
+
+        while(current!=null&&current.data!=key){
+            temp=current;
+            current=current.next;
+        }
+        if(current==null){
+            return;
+        }
+        temp.next=current.next;
+    }
+
     
 
    
@@ -329,6 +353,9 @@ public class SinglyLinkedList_Implementation {
          sll.printElements(reverseList2);
 
          ListNode addSorted= sll.insertTheNodeInSortedList(reverseList2,7);
+         sll.printElements(addSorted);
+
+         sll.removeTheKey(addSorted, 7);
          sll.printElements(addSorted);
 
 

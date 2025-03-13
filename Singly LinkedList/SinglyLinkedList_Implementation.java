@@ -280,9 +280,95 @@ public class SinglyLinkedList_Implementation {
     }
 
     
+    //Detect the loop in a singly LinkedList
+   public boolean detectLoop(ListNode head){
+    if(head==null){
+        return false;
+    }
+    ListNode fastPtr=head;
+    ListNode slowPtr=head;
 
-   
+    while(fastPtr!=null&&fastPtr.next!=null){
+        fastPtr=fastPtr.next.next;
+        slowPtr=slowPtr.next;
+        if(slowPtr==fastPtr){
+            return true;
+        }
+    }
+    return false;
+   }
 
+   //Create a Loop in a singlyLinkedList
+   public ListNode createALoopInSinglyLinkedList(){
+        ListNode first=new ListNode(1);
+        ListNode second=new ListNode(2);
+        ListNode third=new ListNode(3);
+
+        ListNode fourth=new ListNode(4);
+        ListNode fifth=new ListNode(5);
+        ListNode sixth=new ListNode(6);
+
+        head=first;
+        first.next=second;
+        second.next=third;
+        third.next=fourth;
+        fourth.next=fifth;
+        fifth.next=sixth;
+        sixth.next=fourth;
+       
+        return head;
+
+   }
+
+   //Detect the starting point of looped LinkedList
+
+   public ListNode getStartingNode(ListNode slowptr){
+    ListNode temp=head;
+    while(temp!=slowptr){
+        temp=temp.next;
+        slowptr=slowptr.next;
+    }
+    return temp;
+   }
+   public ListNode detectStartingPointLoop(ListNode head){
+    ListNode slowptr=head;
+    ListNode fastptr=head;
+    while(fastptr!=null&&fastptr.next!=null){
+        slowptr=slowptr.next;
+        fastptr=fastptr.next.next;
+        if(slowptr==fastptr){
+            return getStartingNode(slowptr);
+        }
+    }
+    return null;
+
+   }
+
+   //Remove the loop of a singlylinkedlist
+
+   public void removeLoopMethod(ListNode slowPtr){  // using floyd cycle detection algorithm
+    ListNode temp=head;
+    while(temp.next!=slowPtr.next){
+        temp=temp.next;
+        slowPtr=slowPtr.next;
+    }
+
+    slowPtr.next=null;
+
+   }
+
+   public void removeLoop(ListNode head){
+     ListNode slowPtr=head;
+     ListNode fastPtr=head;
+     while(fastPtr.next!=null&&fastPtr!=null){
+        fastPtr=fastPtr.next.next;
+        slowPtr=slowPtr.next;
+        if(slowPtr==fastPtr){
+            removeLoopMethod(slowPtr);
+        }
+     }
+     
+   }
 
 
 
@@ -357,6 +443,22 @@ public class SinglyLinkedList_Implementation {
 
          sll.removeTheKey(addSorted, 7);
          sll.printElements(addSorted);
+
+         boolean isLooped=sll.detectLoop(addSorted);
+         System.out.println(isLooped);
+
+         
+        ListNode loopList= sll.createALoopInSinglyLinkedList();
+        System.out.println(loopList.data);
+
+        System.out.println(sll.detectLoop(loopList));
+
+        ListNode startingPointLoopedList=sll.detectStartingPointLoop(loopList);
+        System.out.println(startingPointLoopedList.data);
+       
+        System.out.println("Is the List Contains Loop?(before removal of loop): "+sll.detectLoop(loopList));
+        sll.removeLoop(loopList);
+        System.out.println("Is the List contains Loop (after removal of loop)? : "+sll.detectLoop(loopList));
 
 
 

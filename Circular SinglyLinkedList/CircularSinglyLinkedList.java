@@ -49,6 +49,7 @@ public class CircularSinglyLinkedList {
 
     }
 
+
     //Traverse the circular singlyLinkedList
     public void printElements(ListNode last){
         if(last==null){
@@ -88,6 +89,8 @@ public class CircularSinglyLinkedList {
         }
         length++;
     }
+
+    
 
     public void delFirst(ListNode last){
         if(isEmpty()){
